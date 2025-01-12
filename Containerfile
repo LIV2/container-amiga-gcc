@@ -1,4 +1,4 @@
-FROM ubuntu:23.10
+FROM ubuntu:24.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -25,7 +25,7 @@ RUN git config --global pull.rebase false && \
     cd /root/amiga-gcc && \
     mkdir -p /opt/amiga && \
     make update && \
-    make -j4 all && \
+    make -j4 all vlink vbcc && \
     cd / && \
     rm -rf /root/amiga-gcc
 
