@@ -28,6 +28,5 @@ jobs:
           context: .
           push: true
           tags: |
-            liv2/amiga-gcc:latest
             liv2/amiga-gcc:${{ github.ref_name }}
             liv2/amiga-gcc:${{ github.sha }}
