@@ -24,6 +24,7 @@ RUN git config --global pull.rebase false && \
     git clone --depth 1 https://github.com/bebbo/amiga-gcc.git && \
     cd /root/amiga-gcc && \
     mkdir -p /opt/amiga && \
+    make branch branch=amiga13.1 mod=gcc && \
     make update && \
     make -j4 all vlink vbcc && \
     cd / && \
