@@ -16,7 +16,8 @@ RUN cd /usr/bin && mv lha lha.lhasa && ln -s jlha lha
 # Install amitools.
 RUN apt-get -y autoremove && \
     rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED && \
-    pip3 install -U git+https://github.com/cnvogelg/amitools.git
+    pip3 install -U git+https://github.com/cnvogelg/amitools.git && \
+    pip3 install machine68k
 
 # Install Bebbo's amiga-gcc
 RUN git config --global pull.rebase false && \
