@@ -22,7 +22,7 @@ RUN apt-get -y autoremove && \
 # Install Bebbo's amiga-gcc
 RUN git config --global pull.rebase false && \
     cd /root && \
-    git clone --depth 1 https://github.com/bebbo/amiga-gcc.git && \
+    git clone --depth 1 https://github.com/AmigaPorts/m68k-amigaos-gcc amiga-gcc && \
     cd /root/amiga-gcc && \
     mkdir -p /opt/amiga && \
     make update && \
