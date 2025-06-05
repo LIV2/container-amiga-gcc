@@ -35,9 +35,13 @@ RUN mkdir -p /tmp/vbcc-targets && \
     curl -o /tmp/vbcc-targets/vbcc_target_m68k-amigaos.lha http://phoenix.owl.de/vbcc/2022-05-22/vbcc_target_m68k-amigaos.lha && \
     cd /tmp/vbcc-targets && \
     lha -x vbcc_target_m68k-amigaos.lha && \
-    cd - && \
     mv /tmp/vbcc-targets/vbcc_target_m68k-amigaos/targets /opt/amiga/m68k-amigaos/vbcc/ && \
-    rm -rf /tmp/vbcc-targets
+    cd - && \
+    mkdir -p /tmp/vbcc-unix-configs && \
+    curl -o /tmp/vbcc-unix-configs/vbcc_unix_config.tar.gz http://phoenix.owl.de/vbcc/2022-02-28/vbcc_unix_config.tar.gz && \
+    tar -xvf /tmp/vbcc-unix-configs/vbcc_unix_config.tar.gz -C /tmp/vbcc-unix-configs && \
+    mv /tmp/vbcc-unix-configs/config /opt/amiga/m68k-amigaos/vbcc/ && \
+    rm -rf /tmp/vbcc-targets /tmp/vbcc-unix-configs
 
 # Clean up
 RUN rm -rf /var/lib/apt/lists/* && \
@@ -45,5 +49,6 @@ RUN rm -rf /var/lib/apt/lists/* && \
       libgmp-dev libmpfr-dev libmpc-dev libncurses-dev rsync texinfo && \
     apt-get -y autoremove
 
-ENV PATH /opt/amiga/bin:$PATH
+ENV VBCC=/opt/amiga/m68k-amigaos/vbcc
+ENV PATH=/opt/amiga/bin:$PATH
 
