@@ -8,6 +8,7 @@ on:
 
 jobs:
   build:
+    if: github.event.base_ref == 'refs/heads/main' || github.event.ref == 'refs/heads/main'
     strategy:
       fail-fast: false
       matrix:
@@ -89,7 +90,7 @@ jobs:
           images: |
             ${{ vars.DOCKERHUB_REPO }}
           tags: |
-            type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'main') }}
+            type=raw,value=latest
             type=sha
             type=ref,event=branch
             type=ref,event=pr
