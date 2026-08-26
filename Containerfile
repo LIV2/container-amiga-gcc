@@ -19,12 +19,16 @@ RUN apt-get -y autoremove && \
     pip3 install -U git+https://github.com/cnvogelg/amitools.git && \
     pip3 install machine68k
 
+ARG GCC_BRANCH=amiga6
+ARG GCC_VERS=6.5.0
+
 # Install Bebbo's amiga-gcc
 RUN git config --global pull.rebase false && \
     cd /root && \
     git clone --depth 1 https://github.com/AmigaPorts/m68k-amigaos-gcc amiga-gcc && \
     cd /root/amiga-gcc && \
     mkdir -p /opt/amiga && \
+    make branch branch=${GCC_BRANCH} mod=gcc && \
     make update && \
     make -j4 all vlink vbcc && \
     cd / && \
@@ -42,6 +46,13 @@ RUN mkdir -p /tmp/vbcc-targets && \
     tar -xvf /tmp/vbcc-unix-configs/vbcc_unix_config.tar.gz -C /tmp/vbcc-unix-configs && \
     mv /tmp/vbcc-unix-configs/config /opt/amiga/m68k-amigaos/vbcc/ && \
     rm -rf /tmp/vbcc-targets /tmp/vbcc-unix-configs
+
+# Install salvador
+RUN git clone https://github.com/emmanuel-marty/salvador.git /tmp/salvador && \
+    make CC=gcc -C /tmp/salvador && \
+    mv /tmp/salvador/salvador /usr/local/bin && \
+    chmod 755 /usr/local/bin/salvador && \
+    rm -rf /tmp/salvador
 
 # Clean up
 RUN rm -rf /var/lib/apt/lists/* && \
