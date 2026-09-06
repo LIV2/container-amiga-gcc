@@ -4,9 +4,18 @@
 
 This container is based on work by Sebastian Bergmann: [Docker Hub](https://hub.docker.com/r/sebastianbergmann/amiga-gcc/).
 
-A ready-to-use image built from this Containerfile is available on [Docker Hub](https://hub.docker.com/r/liv2/amiga-gcc/).
+A ready-to-use image built from this Containerfile is available on [Docker Hub](https://hub.docker.com/r/liv2/amiga-gcc/). It is built as a multi-arch image, with images provided for both `amd64` and `arm64`.
 
 More information can be found [here](https://amiga.sebastian-bergmann.de/presentations/2017/evoke/amiga-software-development-in-2017).
+
+## What's included
+
+In addition to Bebbo's amiga-gcc toolchain, the image also includes:
+
+- **VBCC**, configured with the m68k-amigaos target and the Amiga NDK 3.2 (`$NDK32`)
+- **[amitools](https://github.com/cnvogelg/amitools)**, including `vamos` for running AmigaOS binaries without an emulator
+- **[Salvador](https://github.com/emmanuel-marty/salvador)**, a ZX0 compressor
+- General development tools: `git`, `vim`, `curl`, `wget`, `python3`, `file`, `lhasa`, `srecord`, and `build-essential`
 
 ## "Hello world!" Example
 
